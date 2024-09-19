@@ -1,0 +1,25 @@
+[package]
+name = "symlink-bug"
+version = "0.1.0"
+edition = "2021"
+authors = ["Foo Bar"]
+
+[[bin]]
+name = "a"
+path = "src/a/main.rs"
+
+[[bin]]
+name = "b"
+path = "src/b/main.rs"
+
+[package.metadata.deb]
+maintainer = "Foo bar"
+license-file = "LICENSE"
+depends = []
+assets =    [
+    ["target/release/a", "usr/bin/a", "0555"],
+    ["target/release/b", "usr/bin/b", "0555"],
+    ["a.1",      "usr/share/man/man8/a.1", "0644"],
+    ["b.1",    "usr/share/man/man8/b.1", "0644"],
+]
+preserve-symlinks = true
